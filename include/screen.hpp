@@ -160,7 +160,7 @@ namespace Screen
     private:
 
         std::vector< std::vector<CellC> > cells;
-
+        
         uint8_t CellWidth,   CellHeight;
         uint8_t ScreenWidth, ScreenHeight; 
         
@@ -263,17 +263,25 @@ namespace Screen
     }
 
     void Window::MakeCellGrid(...)
-    {
+    {   
+        constexpr rows    = this->ScreenWidth / this->CellWidth;
+        constexpr columns = this->ScreenHeight / this->CellHeight
+        
+        std::array<CellC, columns> CellsInColumns;
 
-        for(uint8_t k; k < this->ScreenWidth / this->CellWidth; ++k)
+        // Set up delimeters
+        uint8_t h_del;
+        uint8_t w_del;
+        
+        for(uint8_t k; k < rows ; ++k)
         {
-            for(uint8_t m; m < this->ScreenHeight / this->CellHeight; ++m)
+            for(uint8_t m; m < columns; ++m)
             {
-                auto h_del = ScreenHeight * m;
-                auto w_del = ScreenWidth  * k;
-                this->cells[k].push_back(CellC(CellHeight, CellWidth, COLOR::WHITE, 
-                COLOR::BLACK, w_del, h_del));
+               CellsInColumns[m] = CellC(this->CellHeight, this->CellWidth, COLOR::WHITE, COLOR::BLACK, w_del, h_del);     
+               h_del = this->ScreenWidth  * m;
+               w_del = this->ScreenHeight * k;
             }
+            this->cells[k].push_back(CellsInColumns);
         }
     }
 }

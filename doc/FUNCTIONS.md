@@ -107,7 +107,7 @@ void CellC::set_params(std::array<bool, 7> in_params, ...)
 ```
 #### Description
 Setter for cell parameters, actually boolean contained array:
-Array element | Parameter
+Array element | Parameter  
 --------------|-----------
 ZERO          | BOLD
 FIRST         | SEMI-BOLD
