@@ -109,13 +109,13 @@ void CellC::set_params(std::array<bool, 7> in_params, ...)
 Setter for cell parameters, actually boolean contained array:
 Array element | Parameter
 --------------|-----------
-    ZERO      | BOLD
-    FIRST     | SEMI-BOLD
-    SECOND    | ITALIC
-    THIRD     | OVERSTRIKE
-    FOUTH     | OVERSTRIKE2
-    FIFTH     | DIM
-    SIXTH     | UNDERLINE
+ZERO          | BOLD
+FIRST         | SEMI-BOLD
+SECOND        | ITALIC
+THIRD         | OVERSTRIKE
+FOUTH         | OVERSTRIKE2
+FIFTH         | DIM
+SIXTH         | UNDERLINE
 
 ## CellC::set_character()
 ```
