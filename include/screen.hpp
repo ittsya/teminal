@@ -14,6 +14,9 @@
 #define WIDTH_AND_HEIGHT_BEYOND_EDGE 0
 #define WIDTH_BEYOND_EDGE  1
 #define HEIGHT_BEYOND_EDGE 2
+#define WIDTH_AND_HEIGHT_UNDER_EDGE 3
+#define WIDTH_UNDER_EDGE  4
+#define HEIGHT_UNDER_EDGE 5
 #define FN_OK 10
 
 namespace Screen
@@ -165,8 +168,8 @@ namespace Screen
 
         std::vector< std::vector<CellC> > cells;
         
-        uint8_t CellWidth,   CellHeight;
-        uint8_t ScreenWidth, ScreenHeight; 
+        uint32_t CellWidth,   CellHeight;
+        uint32_t ScreenWidth, ScreenHeight; 
         
         Cursor_s Cursor;
     
@@ -286,29 +289,33 @@ namespace Screen
         
         for(uint32_t k = 0; k < rows; k++)
         {
-            w_del = this->ScreenHeight * k;
+            w_del = this->CellHeight * k;
             for(uint32_t m = 0; m < columns; m++)
             {
-               h_del = this->ScreenWidth  * m;
-               fprintf(stderr, "%d", h_del);
+               h_del = this->CellWidth * m;
+               std::cout << h_del << std::endl;
                Cell = CellC(this->CellHeight, this->CellWidth, COLOR::WHITE, COLOR::BLACK, w_del, h_del);     
                Cell.init_default();
-               std::cout << Cell << std::endl;
                CellGrid.push_back(Cell); 
                
             }
             this->cells.push_back(CellGrid);
             CellGrid.clear();
-            
+           
         }
 
     }
 
     uint32_t Window::CellsFits(uint32_t rows, uint32_t columns)
     {
-        if(((rows * this->CellWidth) > this->ScreenWidth) && ((columns * this->CellHeight) > this->ScreenHeight)) {return WIDTH_AND_HEIGHT_BEYOND_EDGE;}
-        if((rows * this->CellWidth) > this->ScreenWidth)      {return WIDTH_BEYOND_EDGE;}
-        if((columns * this->CellHeight) > this->ScreenHeight) {return HEIGHT_BEYOND_EDGE;}      
+        const uint32_t max_in_row = rows    * this->CellWidth;
+        const uint32_t max_in_col = columns * this->CellHeight;
+        if((max_in_row > this->ScreenWidth) && (max_in_col > this->ScreenHeight)) {return WIDTH_AND_HEIGHT_BEYOND_EDGE;}
+        if(max_in_row > this->ScreenWidth)                                        {return WIDTH_BEYOND_EDGE;}
+        if(max_in_col > this->ScreenHeight)                                       {return HEIGHT_BEYOND_EDGE;}
+        if((max_in_row < this->ScreenWidth) && (max_in_col < this->ScreenHeight)) {return WIDTH_AND_HEIGHT_UNDER_EDGE;}
+        if(max_in_row < this->ScreenWidth)                                        {return WIDTH_UNDER_EDGE;}
+        if(max_in_col < this->ScreenHeight)                                       {return HEIGHT_UNDER_EDGE;}   
         return FN_OK;
     }
 
@@ -320,11 +327,17 @@ namespace Screen
             switch(CellsFits(this->ScreenWidth  / this->CellWidth, this->ScreenHeight / this->CellHeight))
             {
                 case WIDTH_BEYOND_EDGE:
-                    this->CellWidth  -=1; break;
+                    this->CellWidth  +=1; break;
                 case HEIGHT_BEYOND_EDGE:
-                    this->CellHeight -=1; break;
+                    this->CellHeight +=1; break;
                 case WIDTH_AND_HEIGHT_BEYOND_EDGE:
-                    this->CellWidth  -=1; this->CellHeight -=1; break;
+                    this->CellWidth  +=1; this->CellHeight +=1; break;
+                case WIDTH_UNDER_EDGE:
+                    this->CellWidth  +=1; break;
+                case HEIGHT_UNDER_EDGE:
+                    this->CellHeight +=1; break;
+                case WIDTH_AND_HEIGHT_UNDER_EDGE:
+                    this->CellWidth  +=1; this->CellHeight +=1; break;
             } 
             if(CellsFits(ScreenWidth / CellWidth ,ScreenHeight / CellHeight) == FN_OK)
                 fprintf(stderr, "\nFixed! Cell height : %d   Cell width : %d\n", this->CellHeight, this->CellWidth);
