@@ -185,13 +185,8 @@ namespace Screen
         ) __attribute__((always_inline));
 
         /* Make grid of cells */
-        void MakeCellGrid(uint32_t columns, uint32_t rows);
+        void MakeCellGrid();
         
-        /* Check if cells are fitting in screen space */
-        uint32_t CellsFits(uint32_t rows, uint32_t columns);
-
-        /* Fix size of cells*/
-        void FixCellSize();
 
     };
 
@@ -275,75 +270,36 @@ namespace Screen
         this->Cursor.x = x; this->Cursor.y = y;
     }
 
-    void Window::MakeCellGrid(uint32_t columns, uint32_t rows)
+    void Window::MakeCellGrid()
     {   
         std::vector<CellC> CellGrid;
-
+        
+        const uint32_t rows    = this->ScreenWidth  / this->CellWidth;
+        const uint32_t columns = this->ScreenHeight / this->CellWidth;
+        
         //Set up delimeters
         uint32_t h_del;
         uint32_t w_del;
         
         CellC Cell; 
         
-        if(CellsFits(columns, rows) == FN_OK) {FixCellSize();} 
-        
         for(uint32_t k = 0; k < rows; k++)
         {
-            w_del = this->CellHeight * k;
+            w_del = this->CellWidth * k;
             for(uint32_t m = 0; m < columns; m++)
             {
-               h_del = this->CellWidth * m;
-               std::cout << h_del << std::endl;
-               Cell = CellC(this->CellHeight, this->CellWidth, COLOR::WHITE, COLOR::BLACK, w_del, h_del);     
-               Cell.init_default();
-               CellGrid.push_back(Cell); 
+               h_del = this->CellHeight * m;
                
+               Cell = CellC(this->CellHeight, this->CellWidth, COLOR::WHITE, COLOR::BLACK, w_del, h_del);     
+            
+               Cell.init_default();
+               CellGrid.push_back(Cell);    
             }
             this->cells.push_back(CellGrid);
             CellGrid.clear();
            
         }
 
-    }
-
-    uint32_t Window::CellsFits(uint32_t rows, uint32_t columns)
-    {
-        const uint32_t max_in_row = rows    * this->CellWidth;
-        const uint32_t max_in_col = columns * this->CellHeight;
-        if((max_in_row > this->ScreenWidth) && (max_in_col > this->ScreenHeight)) {return WIDTH_AND_HEIGHT_BEYOND_EDGE;}
-        if(max_in_row > this->ScreenWidth)                                        {return WIDTH_BEYOND_EDGE;}
-        if(max_in_col > this->ScreenHeight)                                       {return HEIGHT_BEYOND_EDGE;}
-        if((max_in_row < this->ScreenWidth) && (max_in_col < this->ScreenHeight)) {return WIDTH_AND_HEIGHT_UNDER_EDGE;}
-        if(max_in_row < this->ScreenWidth)                                        {return WIDTH_UNDER_EDGE;}
-        if(max_in_col < this->ScreenHeight)                                       {return HEIGHT_UNDER_EDGE;}   
-        return FN_OK;
-    }
-
-    void Window::FixCellSize()
-    {
-        fprintf(stderr, "Size of cells are incorrect, fitting them in...");
-        while (true)
-        {
-            switch(CellsFits(this->ScreenWidth  / this->CellWidth, this->ScreenHeight / this->CellHeight))
-            {
-                case WIDTH_BEYOND_EDGE:
-                    this->CellWidth  +=1; break;
-                case HEIGHT_BEYOND_EDGE:
-                    this->CellHeight +=1; break;
-                case WIDTH_AND_HEIGHT_BEYOND_EDGE:
-                    this->CellWidth  +=1; this->CellHeight +=1; break;
-                case WIDTH_UNDER_EDGE:
-                    this->CellWidth  +=1; break;
-                case HEIGHT_UNDER_EDGE:
-                    this->CellHeight +=1; break;
-                case WIDTH_AND_HEIGHT_UNDER_EDGE:
-                    this->CellWidth  +=1; this->CellHeight +=1; break;
-            } 
-            if(CellsFits(ScreenWidth / CellWidth ,ScreenHeight / CellHeight) == FN_OK)
-                fprintf(stderr, "\nFixed! Cell height : %d   Cell width : %d\n", this->CellHeight, this->CellWidth);
-                break;
-            
-        }
     }
     std::ostream &operator<<(std::ostream &output, const CellC &D)
     {
