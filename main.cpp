@@ -10,22 +10,21 @@
 
 #include "src/debug/debug.cpp"
 #include "src/rendering/screen.cpp"
-#include "src/rendering/SDL2__.cpp"
+#include "src/rendering/SDL2_.cpp"
 
 
 namespace
 {
     SDL_Renderer *renderer;
     SDL_Window   *window;
-    SDL_Event    *event;
     SDL_Texture  *texture;
+    SDL_Event    event;
 
     Int CellWidth  = 10;
     Int CellHeight = 10;
     Int ScreenHeight = 800;
     Int ScreenWidth  = 800; 
 
-    
 
     bool quit           = false;
     bool UseLockTexture = false;
@@ -41,24 +40,22 @@ int main()
     Screen::Window WindowClass(CellWidth, CellHeight, ScreenWidth, ScreenHeight);
 
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_ReInit(&window, &texture, &renderer, &WindowClass);
+    SDL_ReInit(window, texture, renderer, &WindowClass);
 
     while(!quit)
     {
         while(SDL_PollEvent(&event))
         {
-            switch(event)
+            switch(event.type)
             {
                 case SDL_QUIT:
                     quit = true;
                     break;
             }
         }
-
-
     }
 
-    SDL_Destroy(&window, &texture, &renderer);
+    SDL_Destroy(window, renderer, texture);
 
     return 0;
 }
