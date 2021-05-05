@@ -4,7 +4,7 @@
 #ifndef FONT_H
 #define FONT_H
 
-namesoace Screen{
+namespace Screen{
     class Font
     {
     public:
