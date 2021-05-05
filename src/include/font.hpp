@@ -13,15 +13,12 @@ namesoace Screen{
         
         const Int height;
         const Int width;
-
+        
         friend std::ostream &operator<<(std::ostream &output, const Font &D);
+    public:
+        void Set();
     };
     
-    class Predef4x5
-    {
-
-    };
-
     std::ostream &operator<<(std::ostream &output, const Font &D)
     {
         output << "Name: " << D.name << "\nWidth, height: ("
