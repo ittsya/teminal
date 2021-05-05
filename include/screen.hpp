@@ -40,18 +40,18 @@ namespace Screen
     protected:
     
         std::uint_least32_t fgcolor_, bgcolor_;
-        std::size_t         size_x_,  size_y_;
-        std::size_t         pos_x,   pos_y;
+        Int                 size_x_,  size_y_;
+        Int                 pos_x,   pos_y;
 
         
     
     protected:
     
         explicit ScreenObjectC(): fgcolor_(COLOR::WHITE), bgcolor_(COLOR::BLACK), size_x_(STD_SIZE_X), size_y_(STD_SIZE_Y)  {} 
-        explicit ScreenObjectC(size_t x, size_t y) : fgcolor_(COLOR::WHITE), bgcolor_(COLOR::BLACK), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(size_t x, size_t y, std::uint_least32_t fgcolor) : fgcolor_(fgcolor), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(size_t x, size_t y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(size_t x, size_t y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, std::size_t posx, std::size_t posy) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y), pos_x(posx), pos_y(posy) {} 
+        explicit ScreenObjectC(Int x, Int y) : fgcolor_(COLOR::WHITE), bgcolor_(COLOR::BLACK), size_x_(x), size_y_(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor) : fgcolor_(fgcolor), size_x_(x), size_y_(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, Int posx, Int posy) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y), pos_x(posx), pos_y(posy) {} 
     
     public:
         /* Swap foreground and background colors */
@@ -70,21 +70,21 @@ namespace Screen
         
         /*Set size for the object */
         inline void set_size(
-            size_t x, 
-            size_t y
+            Int x, 
+            Int y
         ) __attribute__((always_inline));
     
         /*Set object x and y position */   
         inline void set_pos_xy(
-            size_t x,
-            size_t y
+            Int x,
+            Int y
         ) __attribute__((always_inline));
     
         /* Get current oject position in (x,y) format */
-        inline std::pair<size_t, size_t> GetPosition() const __attribute__((always_inline, const));
+        inline std::pair<Int, Int> GetPosition() const __attribute__((always_inline, const));
     
         /* Get object size in (x,y) format */
-        inline std::pair<size_t, size_t> GetSize() const __attribute__((always_inline, const));
+        inline std::pair<Int, Int> GetSize() const __attribute__((always_inline, const));
     
         /* Get object color in (x,y)format  */ 
         inline std::pair<std::uint_least32_t, std::uint_least32_t> GetColor() const __attribute__((always_inline, const));
@@ -104,10 +104,10 @@ namespace Screen
     public:
     
         explicit CellC() : ScreenObjectC() {}
-        explicit CellC(size_t x, size_t y) : ScreenObjectC(x, y) {}
-        explicit CellC(size_t x, size_t y, std::uint_least32_t fgcolor) : ScreenObjectC(x, y ,fgcolor) {}
-        explicit CellC(size_t x, size_t y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : ScreenObjectC(x, y ,fgcolor, bgcolor) {}
-        explicit CellC(size_t x, size_t y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, std::size_t posx, std::size_t posy) : ScreenObjectC(x, y ,fgcolor, bgcolor, posx, posy) {}
+        explicit CellC(Int x, Int y) : ScreenObjectC(x, y) {}
+        explicit CellC(Int x, Int y, std::uint_least32_t fgcolor) : ScreenObjectC(x, y ,fgcolor) {}
+        explicit CellC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : ScreenObjectC(x, y ,fgcolor, bgcolor) {}
+        explicit CellC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, Int posx, Int posy) : ScreenObjectC(x, y ,fgcolor, bgcolor, posx, posy) {}
     
     public:
 
@@ -158,7 +158,7 @@ namespace Screen
             bool block       : 1;
             bool underline   : 1;
             bool thick       : 1;
-            size_t x, y;
+            Int x, y;
             
             explicit Cursor_s() : fgcolor(COLOR::BLACK), bgcolor(COLOR::WHITE), is_blinking(1), is_shown(1), block(1), x(0), y(0) {}  
         
@@ -168,20 +168,23 @@ namespace Screen
 
         std::vector< std::vector<CellC> > cells;
         
-        uint32_t CellWidth,   CellHeight;
-        uint32_t ScreenWidth, ScreenHeight; 
+        Int CellWidth,   CellHeight;
+        Int ScreenWidth, ScreenHeight; 
         
         Cursor_s Cursor;
     
     public:
 
-        explicit Window(uint32_t ScreenW, uint32_t ScreenH) : CellWidth(10), CellHeight(15), ScreenWidth(ScreenW), ScreenHeight(ScreenH) {}
-        explicit Window(uint32_t CellW, uint32_t CellH, uint32_t ScreenW, uint32_t ScreenH) : CellWidth(CellW), CellHeight(CellH), ScreenWidth(ScreenW), ScreenHeight(ScreenH) {}
+        explicit Window(Int ScreenW, Int ScreenH) : CellWidth(10), CellHeight(15), ScreenWidth(ScreenW), ScreenHeight(ScreenH) {}
+        explicit Window(Int CellW, Int CellH, Int ScreenW, Int ScreenH) : CellWidth(CellW), CellHeight(CellH), ScreenWidth(ScreenW), ScreenHeight(ScreenH) {}
         
+        /* Get Window Height and Window Width*/
+        inline std::pair<Int, Int> GetWndCoords() __attribute__((always_inline));
+
         /* Set cursor coordinates */
         inline void SetCurCoordinates(
-            size_t x,
-            size_t y
+            Int x,
+            Int y
         ) __attribute__((always_inline));
 
         /* Make grid of cells */
@@ -210,22 +213,22 @@ namespace Screen
         this->fgcolor_ = fgcolor;
     }
 
-    inline void ScreenObjectC::set_size(size_t x, size_t y)
+    inline void ScreenObjectC::set_size(Int x, Int y)
     {
         this->size_x_ = x; this->size_y_ = y;
     }
 
-    inline void ScreenObjectC::set_pos_xy(size_t x, size_t y)
+    inline void ScreenObjectC::set_pos_xy(Int x, Int y)
     {
         this->pos_x = x; this->pos_y = y;
     }
 
-    inline std::pair<size_t, size_t>  ScreenObjectC::GetPosition() const
+    inline std::pair<Int, Int>  ScreenObjectC::GetPosition() const
     {
         return std::make_pair(this->pos_x, this->pos_y);
     }
 
-    inline std::pair<size_t, size_t>  ScreenObjectC::GetSize() const
+    inline std::pair<Int, Int>  ScreenObjectC::GetSize() const
     {
         return std::make_pair(this->size_x_, this->size_y_);
     }
@@ -265,7 +268,7 @@ namespace Screen
     }
 
     /*WINDOW CLASS FUNCTION*/
-    inline void Window::SetCurCoordinates(size_t x, size_t y)
+    inline void Window::SetCurCoordinates(Int x, Int y)
     {
         this->Cursor.x = x; this->Cursor.y = y;
     }
@@ -274,19 +277,19 @@ namespace Screen
     {   
         std::vector<CellC> CellGrid;
         
-        const uint32_t rows    = this->ScreenWidth  / this->CellWidth;
-        const uint32_t columns = this->ScreenHeight / this->CellWidth;
+        const Int rows    = this->ScreenWidth  / this->CellWidth;
+        const Int columns = this->ScreenHeight / this->CellWidth;
         
         //Set up delimeters
-        uint32_t h_del;
-        uint32_t w_del;
+        Int h_del;
+        Int w_del;
         
         CellC Cell; 
         
-        for(uint32_t k = 0; k < rows; k++)
+        for(Int k = 0; k < rows; k++)
         {
             w_del = this->CellWidth * k;
-            for(uint32_t m = 0; m < columns; m++)
+            for(Int m = 0; m < columns; m++)
             {
                h_del = this->CellHeight * m;
                
