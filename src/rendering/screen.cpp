@@ -1,8 +1,7 @@
-#include "../../include/screen.hpp"
+#include "../include/screen.hpp"
 
 namespace Screen
 {
-    
             /*SCREEN OBJECT CLASS FUNCTIONS */
     inline void ScreenObjectC::reverse_colors()
     {
