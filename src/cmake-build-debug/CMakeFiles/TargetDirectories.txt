@@ -1,0 +1,3 @@
+/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/Terminal.dir

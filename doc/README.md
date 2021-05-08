@@ -1,1 +1,0 @@
-A simple terminal emulator. Will only support bitmaps fonts.

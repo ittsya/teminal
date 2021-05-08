@@ -1,7 +1,4 @@
-#pragma once 
-#ifndef SCREEN_H
-#define SCREEN_H
-
+#pragma once
 #include <cinttypes>
 #include <utility>
 #include <vector>
@@ -18,6 +15,8 @@
 #define WIDTH_UNDER_EDGE  4
 #define HEIGHT_UNDER_EDGE 5
 #define FN_OK 10
+
+typedef unsigned int Int;
 
 namespace Screen
 {
@@ -39,55 +38,53 @@ namespace Screen
     
     protected:
     
-        std::uint_least32_t fgcolor_, bgcolor_;
-        Int                 size_x_,  size_y_;
+        std::uint_least32_t fgcolor, bgcolor;
+        Int                 size_x,  size_y;
         Int                 pos_x,   pos_y;
 
-        
-    
     protected:
     
-        explicit ScreenObjectC(): fgcolor_(COLOR::WHITE), bgcolor_(COLOR::BLACK), size_x_(STD_SIZE_X), size_y_(STD_SIZE_Y)  {} 
-        explicit ScreenObjectC(Int x, Int y) : fgcolor_(COLOR::WHITE), bgcolor_(COLOR::BLACK), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor) : fgcolor_(fgcolor), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y) {} 
-        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, Int posx, Int posy) : fgcolor_(fgcolor), bgcolor_(bgcolor), size_x_(x), size_y_(y), pos_x(posx), pos_y(posy) {} 
+        explicit ScreenObjectC(): fgcolor(COLOR::WHITE), bgcolor(COLOR::BLACK), size_x(STD_SIZE_X), size_y(STD_SIZE_Y)  {} 
+        explicit ScreenObjectC(Int x, Int y) : fgcolor(COLOR::WHITE), bgcolor(COLOR::BLACK), size_x(x), size_y(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor) : fgcolor(fgcolor), size_x(x), size_y(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor) : fgcolor(fgcolor), bgcolor(bgcolor), size_x(x), size_y(y) {} 
+        explicit ScreenObjectC(Int x, Int y, std::uint_least32_t fgcolor, std::uint_least32_t bgcolor, Int posx, Int posy) : fgcolor(fgcolor), bgcolor(bgcolor), size_x(x), size_y(y), pos_x(posx), pos_y(posy) {} 
     
     public:
         /* Swap foreground and background colors */
-        inline void reverse_colors() __attribute__((always_inline));
+        void reverse_colors() ;
     
         /* Set color for the object */
-        inline void Paint(
+        void Paint(
             std::uint_least32_t fgcolor,
             std::uint_least32_t bgcolor
-        ) __attribute__((always_inline));
+        );
     
         /* Set only foreground color for the object */
-        inline void Paint(
+        void Paint(
             std::uint_least32_t fgcolor
-        ) __attribute__((always_inline));
+        );
         
         /*Set size for the object */
-        inline void set_size(
+        void set_size(
             Int x, 
             Int y
-        ) __attribute__((always_inline));
+        );
     
         /*Set object x and y position */   
-        inline void set_pos_xy(
+        void set_pos_xy(
             Int x,
             Int y
-        ) __attribute__((always_inline));
+        );
     
         /* Get current oject position in (x,y) format */
-        inline std::pair<Int, Int> GetPosition() const __attribute__((always_inline, const));
+        const std::pair<Int, Int> GetPosition() const ;
     
         /* Get object size in (x,y) format */
-        inline std::pair<Int, Int> GetSize() const __attribute__((always_inline, const));
+        const std::pair<Int, Int> GetSize() const ;
     
         /* Get object color in (x,y)format  */ 
-        inline std::pair<std::uint_least32_t, std::uint_least32_t> GetColor() const __attribute__((always_inline, const));
+        const std::pair<std::uint_least32_t, std::uint_least32_t> GetColor() const ;
     };
     
     /* Nice and shiny Cell class*/
@@ -112,7 +109,7 @@ namespace Screen
     public:
 
         /* Set cell parameters, such as: dim, underline, overstrike etc. */
-        inline void set_params(
+        void set_params(
             /*  _______________________________ 
             *  | NAME       |    NUMBER        |
             *  |            |                  |
@@ -126,21 +123,21 @@ namespace Screen
             *  |____________|__________________|  
             */         
             std::array<bool, 7> in_params
-        ) __attribute__((always_inline));
+        ) ;
         
         /* Set 32 bit char cahracter for cell */
-        inline void set_character(
+        void set_character(
             char chararacter
-        ) __attribute__((always_inline));
+        ) ;
 
         /* Init Cell with none additional text styles, and with "?" symbol in it */
-        inline void init_default();
+        void init_default();
 
         /* Getter for cell params */
-        inline std::array<bool, 7> get_params() const __attribute__((always_inline));
+        const std::array<bool, 7> get_params() const ;
         
         /* Getter for cell character */
-        inline char32_t get_character() const __attribute__((always_inline)); 
+        char32_t get_character() const ;
 
     };
     
@@ -179,16 +176,15 @@ namespace Screen
         explicit Window(Int CellW, Int CellH, Int ScreenW, Int ScreenH) : CellWidth(CellW), CellHeight(CellH), ScreenWidth(ScreenW), ScreenHeight(ScreenH) {}
         
         /* Get Window Height and Window Width*/
-        inline std::pair<Int, Int> GetWndCoords() __attribute__((always_inline));
+        const std::pair<Int, Int> GetWndCoords() const;
 
         /* Set cursor coordinates */
-        inline void SetCurCoordinates(
+        void SetCurCoordinates(
             Int x,
             Int y
-        ) __attribute__((always_inline));
+        );
 
         /* Make grid of cells */
         void MakeCellGrid();
     };
 }
-#endif /* SCREEN_H */

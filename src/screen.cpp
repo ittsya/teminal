@@ -1,84 +1,89 @@
 #include "../include/screen.hpp"
 
+
+#include <iostream>
+
+typedef unsigned int Int;
+
 namespace Screen
 {
             /*SCREEN OBJECT CLASS FUNCTIONS */
-    inline void ScreenObjectC::reverse_colors()
+    extern void ScreenObjectC::reverse_colors()
     {
-        std::swap(this->bgcolor_, this->fgcolor_);
+        std::swap(this->bgcolor, this->fgcolor);
     }
 
-    inline void ScreenObjectC::Paint(std::uint_least32_t fgcolor, std::uint_least32_t bgcolor)
+    extern void ScreenObjectC::Paint(std::uint_least32_t fgcolor, std::uint_least32_t bgcolor)
     {
-        this->fgcolor_ = fgcolor; this->bgcolor_ = bgcolor;
+        this->fgcolor = fgcolor; this->bgcolor = bgcolor;
     }
 
-    inline void ScreenObjectC::Paint(std::uint_least32_t fgcolor)
+    extern void ScreenObjectC::Paint(std::uint_least32_t fgcolor)
     {
-        this->fgcolor_ = fgcolor;
+        this->fgcolor = fgcolor;
     }
 
-    inline void ScreenObjectC::set_size(Int x, Int y)
+    extern void ScreenObjectC::set_size(Int x, Int y)
     {
-        this->size_x_ = x; this->size_y_ = y;
+        this->size_x = x; this->size_y = y;
     }
 
-    inline void ScreenObjectC::set_pos_xy(Int x, Int y)
+    extern void ScreenObjectC::set_pos_xy(Int x, Int y)
     {
         this->pos_x = x; this->pos_y = y;
     }
 
-    inline std::pair<Int, Int>  ScreenObjectC::GetPosition() const
+    extern const std::pair<Int, Int> ScreenObjectC::GetPosition() const
     {
         return std::make_pair(this->pos_x, this->pos_y);
     }
 
-    inline std::pair<Int, Int>  ScreenObjectC::GetSize() const
+    extern const std::pair<Int, Int> ScreenObjectC::GetSize() const
     {
-        return std::make_pair(this->size_x_, this->size_y_);
+        return std::make_pair(this->size_x, this->size_y);
     }
 
-    inline std::pair<std::uint_least32_t, std::uint_least32_t> ScreenObjectC::GetColor() const
+    extern const std::pair<std::uint_least32_t, std::uint_least32_t> ScreenObjectC::GetColor() const
     {
-        return std::make_pair(this->fgcolor_, this->bgcolor_);
+        return std::make_pair(this->fgcolor, this->bgcolor);
     }
 
     /*CELL CLASS FUNCTIONS*/
-    inline void CellC::set_params(std::array<bool, 7> in_params)
+    extern void CellC::set_params(std::array<bool, 7> in_params)
     {
         for (int i = 0; i < 7; i++)
         {
             this->cell_parameters[i] = in_params[i];
         }     
     }
-    inline void CellC::set_character(char character)
+    extern void CellC::set_character(char character)
     {
         this->cell_symbol = character;
     }
 
-    void CellC::init_default()
+    extern void CellC::init_default()
     {
         this->cell_symbol = '?';
         this->cell_parameters = {0, 0, 0, 0, 0, 0, 0};
     }
 
-    inline std::array<bool, 7> CellC::get_params() const 
+    extern const std::array<bool, 7> CellC::get_params() const
     {
         return this->cell_parameters;
     }
 
-    inline char32_t CellC::get_character() const 
+    extern char32_t CellC::get_character() const
     {
         return this->cell_symbol;
     }
 
     /*WINDOW CLASS FUNCTION*/
-    inline void Window::SetCurCoordinates(Int x, Int y)
+    extern void Window::SetCurCoordinates(Int x, Int y)
     {
         this->Cursor.x = x; this->Cursor.y = y;
     }
 
-    void Window::MakeCellGrid()
+    extern void Window::MakeCellGrid()
     {   
         std::vector<CellC> CellGrid;
         
@@ -109,18 +114,18 @@ namespace Screen
         }
 
     }
-    
-    inline std::pair<Int, Int> Window::GetWndCoords()
+
+    extern const std::pair<Int, Int> Window::GetWndCoords() const
     {
         return std::make_pair(this->ScreenWidth, this->ScreenHeight);
     }
     
-    std::ostream &operator<<(std::ostream &output, const CellC &D)
+    extern std::ostream &operator<<(std::ostream &output, const Screen::CellC &D)
     {
         output << "ScreenObject class in " << &D << ":\n";
-        output << "Color:    (" << std::hex << D.fgcolor_  << ", " << D.bgcolor_ << ")  ";
+        output << "Color:    (" << std::hex << D.fgcolor  << ", " << D.bgcolor << ")  ";
         output << "Position: (" << std::dec << D.pos_x     << ", " << D.pos_y    << ")  ";
-        output << "Size:     (" << D.size_x_ << ", "<< D.size_y_ << ")\n";
+        output << "Size:     (" << D.size_x << ", "<< D.size_y << ")\n";
         output << "Character: " << D.cell_symbol;
         return output;
     }

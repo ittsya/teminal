@@ -1,17 +1,14 @@
-#include <iostream>
-#include <codecvt>
-#include <locale>
-#include <string>
-
-#include <stdio.h>
 #include <SDL2/SDL.h>
+#include <iostream>
+#include <vector>
+#include <cstdint>
 
-#define Int unsigned int
+typedef unsigned int Int;
 
-#include "src/debug/debug.cpp"
-#include "src/rendering/screen.cpp"
-#include "src/rendering/SDL2_.cpp"
-
+#include "../include/debug.hpp"
+#include "../include/font.hpp"
+#include "../include/SDL2_.hpp"
+#include "../include/screen.hpp"
 
 namespace
 {
@@ -36,11 +33,10 @@ namespace
 }
 int main()
 {
-
     Screen::Window WindowClass(CellWidth, CellHeight, ScreenWidth, ScreenHeight);
-
+    auto WindowCoords = WindowClass.GetWndCoords();
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_ReInit(window, texture, renderer, &WindowClass);
+    SDL::ReInit(window, texture, renderer, WindowCoords);
 
     while(!quit)
     {
@@ -55,7 +51,7 @@ int main()
         }
     }
 
-    SDL_Destroy(window, renderer, texture);
+    SDL::Destroy(window, renderer, texture);
 
     return 0;
 }

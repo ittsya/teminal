@@ -22,7 +22,9 @@ namespace Screen{
     std::ostream &operator<<(std::ostream &output, const Font &D)
     {
         output << "Name: " << D.name << "\nWidth, height: ("
-        << D.width << ", " << this.height << ") ";
+        << D.width << ", " << D.height << ") ";
+        return output;
     }
+
 }
 #endif // FONT_H
