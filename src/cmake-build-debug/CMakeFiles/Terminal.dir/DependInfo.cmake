@@ -13,6 +13,7 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "../&{SDL2_INCLUDE_DIRS}"
   "../../include"
+  "../../include/parser"
   "/usr/include/SDL2"
   )
 

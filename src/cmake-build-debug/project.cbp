@@ -46,6 +46,7 @@
 				<Compiler>
 					<Add directory="/home/ittsya/SDL2/teminal/src/&amp;{SDL2_INCLUDE_DIRS}"/>
 					<Add directory="/home/ittsya/SDL2/teminal/src/../include"/>
+					<Add directory="/home/ittsya/SDL2/teminal/src/../include/parser"/>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>
@@ -71,6 +72,7 @@
 				<Compiler>
 					<Add directory="/home/ittsya/SDL2/teminal/src/&amp;{SDL2_INCLUDE_DIRS}"/>
 					<Add directory="/home/ittsya/SDL2/teminal/src/../include"/>
+					<Add directory="/home/ittsya/SDL2/teminal/src/../include/parser"/>
 					<Add directory="/usr/include/SDL2"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0"/>
 					<Add directory="/usr/lib/gcc/x86_64-pc-linux-gnu/10.2.0/../../../../include/c++/10.2.0/x86_64-pc-linux-gnu"/>

@@ -13,6 +13,8 @@ SDL2/SDL.h
 -
 
 /home/ittsya/SDL2/teminal/include/debug.hpp
+optional
+-
 
 /home/ittsya/SDL2/teminal/include/font.hpp
 
@@ -36,6 +38,8 @@ iostream
 vector
 -
 cstdint
+-
+stdio.h
 -
 ../include/debug.hpp
 /home/ittsya/SDL2/teminal/include/debug.hpp

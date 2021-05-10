@@ -2,9 +2,11 @@
 #include <iostream>
 #include <vector>
 #include <cstdint>
+#include <stdio.h>
 
 typedef unsigned int Int;
 
+//#include "../include/parser/parser.hpp"
 #include "../include/debug.hpp"
 #include "../include/font.hpp"
 #include "../include/SDL2_.hpp"
@@ -33,11 +35,18 @@ namespace
 }
 int main()
 {
-    Screen::Window WindowClass(CellWidth, CellHeight, ScreenWidth, ScreenHeight);
-    auto WindowCoords = WindowClass.GetWndCoords();
-    SDL_Init(SDL_INIT_VIDEO);
-    SDL::ReInit(window, texture, renderer, WindowCoords);
+    //Screen::Window WindowClass(CellWidth, CellHeight, ScreenWidth, ScreenHeight);
+    //auto WindowCoords = WindowClass.GetWndCoords();
+    //SDL_Init(SDL_INIT_VIDEO);
+    //SDL::ReInit(window, texture, renderer, WindowCoords);
+    //std::string f = "8x13.bdf";
+    //Screen::BitMapParser BitParser(f);
+    //BitParser.Parse();
 
+    Mmap<int, Int, uint8_t> mymap;
+
+
+    #if 0
     while(!quit)
     {
         while(SDL_PollEvent(&event))
@@ -52,6 +61,6 @@ int main()
     }
 
     SDL::Destroy(window, renderer, texture);
-
+    #endif
     return 0;
 }
