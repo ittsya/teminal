@@ -9,15 +9,20 @@
 #include <algorithm>
 #include <sstream>
 #include <cctype>
+#include <mutex>
+
+#include "../include/Matrix.hpp"
+#include "../include/Counter.hpp"
 
 typedef unsigned int Int;
 
 #define LINE_LENGTH 256
 
-namespace Screen {
+namespace Screen
+{
 
-    class Parser {
-
+    class Parser
+    {
     protected:
 
         std::string FileName;
@@ -26,9 +31,6 @@ namespace Screen {
         void Check();
 
     public:
-
-
-        virtual void Parse() = 0;
 
         virtual ~Parser() {};
         Parser() {};
@@ -39,23 +41,38 @@ namespace Screen {
 
     private:
 
+        std::once_flag OnceFlag;
+
+        bool IsBitmap = false;
+
+        void *tmp;
+        matrix<unsigned char>* Bitmap = nullptr;
+
         std::unordered_map<std::string, std::string> info;
         std::unordered_map<std::string, Int> info_num;
 
+        std::pair<Int, Int> GetSize();
 
+        Counter<int> c_x, c_y;
 
+        void Analyze(std::string &&token1, std::string &&token2, bool junk, bool token2_is_digit);
         void CreateBitMapArray(Int sizex ,Int sizey);
+
     public:
 
         BitMapParser(std::string FileName);
+
         ~BitMapParser();
 
+        void Parse();
 
-        void Parse() override;
 
-        void Analyze(std::string token1, std::string token2);
 
-    };
+
+
+
+
+        };
 
 }
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 
-set(CMAKE_CXX_FLAGS "-std=c++17 -Wall -Wextra -O3")
+set(CMAKE_CXX_FLAGS "-std=c++2a -Wall -Wextra -O3 -fsanitize=address")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ../../bin/)
 project(project)
 
@@ -10,8 +10,9 @@ include_directories(../include/parser/)
 
 
 add_executable(Terminal
+        parser.cpp
         screen.cpp
-        main.cpp )
+        main.cpp ../include/Matrix.hpp ../include/Counter.hpp ../include/Concepts.hpp)
 
 INCLUDE(FindPkgConfig)
 

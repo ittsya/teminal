@@ -93,7 +93,7 @@ namespace Screen
     
     private:   
     
-        char            cell_symbol = ' ';    
+        char                cell_symbol = ' ';
         std::array<bool, 7> cell_parameters; 
 
         friend std::ostream &operator<<(std::ostream &output, const CellC &D);

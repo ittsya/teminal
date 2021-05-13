@@ -16,49 +16,16 @@ void PrintVec(std::vector<contents> vec)
         std::cout << *i << std::endl;
 }
 
-// MATRIX
 
-
-template<class TYPE>
-class Matrix
+// From boost
+template<typename T1, typename T2>
+T1 lexical_cast(T2 &t1)
 {
-private:
-
-    Int size_x, size_y;
-
-    TYPE *Matrix_ptr;
-
-public:
-
-    Matrix(Int size_x, Int size_y)
-    {
-        this->size_x = size_x;
-        this->size_y = size_y;
-
-        this->Matrix_ptr = new TYPE[this->size_x * this->size_y];
-    }
-
-    ~Matrix()
-    {
-        delete[] this->Matrix_ptr;
-    }
-
-    // Objective value, need to be accurate here
-    std::optional<TYPE> operator () (Int x, Int y) const
-    {
-        auto ret_val = Matrix_ptr[y * this->size_y + x];
-        if(std::is_same_v<TYPE, decltype(ret_val)>)
-            return ret_val;
-        return std::nullopt;
-    }
-
-    void insert(TYPE var, Int x, Int y)
-    {
-        Matrix_ptr[y * this->size_y + x] = var;
-    }
-};
-
-
-// TODO implement map w 2 keys
+    T1 output;
+    std::stringstream stream;
+    stream << t1;
+    stream >> output;
+    return output;
+}
 
 #endif //TERMINAL_DEBUG_HPP

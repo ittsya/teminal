@@ -6,5 +6,5 @@ CXX_DEFINES =
 
 CXX_INCLUDES = -I"/home/ittsya/SDL2/teminal/src/&{SDL2_INCLUDE_DIRS}" -I/home/ittsya/SDL2/teminal/src/../include -I/home/ittsya/SDL2/teminal/src/../include/parser -I/usr/include/SDL2
 
-CXX_FLAGS = -std=c++17 -Wall -Wextra -O3 -g
+CXX_FLAGS = -std=c++2a -Wall -Wextra -O3 -fsanitize=address -g
 

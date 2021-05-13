@@ -1,1 +1,1 @@
-/usr/bin/c++ -std=c++17 -Wall -Wextra -O3 -g CMakeFiles/Terminal.dir/screen.cpp.o CMakeFiles/Terminal.dir/main.cpp.o -o /home/ittsya/SDL2/teminal/bin/Terminal  -lSDL2 
+/usr/bin/c++ -std=c++2a -Wall -Wextra -O3 -fsanitize=address -g CMakeFiles/Terminal.dir/parser.cpp.o CMakeFiles/Terminal.dir/screen.cpp.o CMakeFiles/Terminal.dir/main.cpp.o -o /home/ittsya/SDL2/teminal/bin/Terminal  -lSDL2 

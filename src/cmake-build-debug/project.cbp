@@ -90,7 +90,19 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/home/ittsya/SDL2/teminal/include/Concepts.hpp">
+			<Option target="Terminal"/>
+		</Unit>
+		<Unit filename="/home/ittsya/SDL2/teminal/include/Counter.hpp">
+			<Option target="Terminal"/>
+		</Unit>
+		<Unit filename="/home/ittsya/SDL2/teminal/include/Matrix.hpp">
+			<Option target="Terminal"/>
+		</Unit>
 		<Unit filename="/home/ittsya/SDL2/teminal/src/main.cpp">
+			<Option target="Terminal"/>
+		</Unit>
+		<Unit filename="/home/ittsya/SDL2/teminal/src/parser.cpp">
 			<Option target="Terminal"/>
 		</Unit>
 		<Unit filename="/home/ittsya/SDL2/teminal/src/screen.cpp">

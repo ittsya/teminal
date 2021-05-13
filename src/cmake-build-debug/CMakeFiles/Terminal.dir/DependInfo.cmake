@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/ittsya/SDL2/teminal/src/main.cpp" "/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/Terminal.dir/main.cpp.o"
+  "/home/ittsya/SDL2/teminal/src/parser.cpp" "/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/Terminal.dir/parser.cpp.o"
   "/home/ittsya/SDL2/teminal/src/screen.cpp" "/home/ittsya/SDL2/teminal/src/cmake-build-debug/CMakeFiles/Terminal.dir/screen.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

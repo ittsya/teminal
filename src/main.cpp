@@ -6,11 +6,13 @@
 
 typedef unsigned int Int;
 
-//#include "../include/parser/parser.hpp"
+#include "../include/parser/parser.hpp"
 #include "../include/debug.hpp"
 #include "../include/font.hpp"
 #include "../include/SDL2_.hpp"
 #include "../include/screen.hpp"
+#include "../include/Matrix.hpp"
+#include "../include/Counter.hpp"
 
 namespace
 {
@@ -28,6 +30,8 @@ namespace
     bool quit           = false;
     bool UseLockTexture = false;
 
+
+
     Int frames = 0;
 
     uint64_t start = SDL_GetPerformanceCounter();
@@ -39,11 +43,9 @@ int main()
     //auto WindowCoords = WindowClass.GetWndCoords();
     //SDL_Init(SDL_INIT_VIDEO);
     //SDL::ReInit(window, texture, renderer, WindowCoords);
-    //std::string f = "8x13.bdf";
-    //Screen::BitMapParser BitParser(f);
-    //BitParser.Parse();
-
-    Mmap<int, Int, uint8_t> mymap;
+    std::string f = "8x13.bdf";
+    Screen::BitMapParser BitParser(f);
+    BitParser.Parse();
 
 
     #if 0
