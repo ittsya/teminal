@@ -12,15 +12,15 @@ private:
     _TYPE _COUNTER, _STARTVALUE;
 public:
 
-    inline void set(_TYPE StartValue = _TYPE()) {this->_STARTVALUE = StartValue;}
+    inline void set(_TYPE StartValue = _TYPE()) {_STARTVALUE = StartValue;}
     
-    inline void reset() {this->_STARTVALUE = this->_STARTVALUE;}
+    inline void reset() {_STARTVALUE = _STARTVALUE;}
     
-    inline void start(_TYPE StartNum = _TYPE()) {this->_COUNTER = StartNum; }
+    inline void start(_TYPE StartNum = _TYPE()) {_COUNTER = StartNum; }
 
-    inline void tick(_TYPE how_much = _TYPE() + (_TYPE)1) {this->_COUNTER += how_much;}
+    inline void tick(_TYPE how_much = _TYPE() + (_TYPE)1) {_COUNTER += how_much;}
 
-    _TYPE GetCount() {return this->_COUNTER;}
+    _TYPE GetCount() {return _COUNTER;}
 };
 
 #endif //PROJECT_COUNTER_HPP
